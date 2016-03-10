@@ -58,3 +58,10 @@ module piBoard (board) {
 		echo("CAUTION: The mounting hole positions for the board you have selected may not be accurate because the Raspberry Pi Foundation does not currently provide official mechanical drawings for it.");
 	}
 }
+
+color("DarkGreen", 1, $fn=20) {
+	piBoard("1B");
+	translate([100,0,0]) piBoard("1A+");
+	translate([0,80,0]) piBoard("2B");
+	translate([100,80,0]) piBoard("Zero");
+}

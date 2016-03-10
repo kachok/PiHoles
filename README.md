@@ -36,3 +36,6 @@ PiHole can also generate the holes and/or board shape for you.
 	* Generates the shape of the mounting holes for the selected board with the given hole depth in mm. This is intended to be used within a `difference` operation with the object you want to make holes in.
 	* The `preview` parameter (optional, default `true`) defines whether or not to show a preview of the board along with the mounting holes, intended to help position the board and model around it. This is only shown in the OpenSCAD "Compile" preview and does not affect the final rendering.
 	* The holes are cylinder primitives, so you can optionally set the [special variables](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/The_OpenSCAD_Language#Special_variables) `$fa`, `$fs`, and `$fn` to define the number of facets.
+
+
+![Rendering of four of the Raspberry Pi board shapes supported by PiHole.scad](boards.png)
