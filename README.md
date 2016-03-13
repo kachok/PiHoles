@@ -37,5 +37,11 @@ PiHole can also generate the holes and/or board shape for you.
 	* The `preview` parameter (optional, default `true`) defines whether or not to show a preview of the board along with the mounting holes, intended to help position the board and model around it. This is only shown in the OpenSCAD "Compile" preview and does not affect the final rendering.
 	* The holes are cylinder primitives, so you can optionally set the [special variables](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/The_OpenSCAD_Language#Special_variables) `$fa`, `$fs`, and `$fn` to define the number of facets.
 
+* `piPosts(board, height, preview)`
+	* Generates screwless mounting posts that the pi can snap onto, intended for 3D printing.
+	* This is only recommended for Raspberry Pi models that have a minimum of four mounting holes, such as the B+ and later and Zero. Attempting to use the mounting posts with the Pi 1 model B may not result in a good fit.
+	* The `height` parameter (optional, default 5) defines the height in mm that the top surface of the Raspberry Pi board should be held up off the base of the mounting posts. The default value of 5 provides the right amount of clearance for everything that sticks out on the bottom of a Raspberry Pi 1B+, 2B, or 3B.
+	* The `preview` parameter (optional, default `true`) defines whether or not to show a preview of the board along with the mounting holes, intended to help position the board and model around it. This is only shown in the OpenSCAD "Compile" preview and does not affect the final rendering.
+
 
 ![Rendering of four of the Raspberry Pi board shapes supported by PiHole.scad](boards.png)

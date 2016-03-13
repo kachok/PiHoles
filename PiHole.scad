@@ -59,6 +59,30 @@ module piBoard (board) {
 	}
 }
 
+//Snap-fit posts for mounting the Raspberry Pi
+//	Parameters
+//		board: version of the raspberry pi to mount
+//		height: height of the top surface of the raspberry pi board off the base of the posts
+//		preview: whether or not to show a preview of the board in place
+module piPosts(board, height=5, preview=true) {
+	piSize = piBoardDim(board);
+	piHolePos = piHoleLocations(board);
+
+	module pcbPost(height) {
+		cylinder(d=2, h=height);
+		cylinder(d1=5, d2=2, h=height - piSize[2] - 0.25);
+
+		translate([0, 0.4, height]) scale([1.1, 1.1, 1]) cylinder(d=2, h=0.5);
+	}
+	
+	for(holePos = piHolePos) {
+		translate([holePos[0], holePos[1], 0]) pcbPost(height);
+	}
+
+	if(preview==true)
+		% translate([0,0,height-piSize[2]]) piBoard(board);
+}
+
 color("DarkGreen", 1, $fn=20) {
 	piBoard("1B");
 	translate([100,0,0]) piBoard("1A+");
