@@ -48,8 +48,32 @@ module piHoles (board, depth = 5, preview=true) {
 	
 	//mounting holes
 	for(holePos = piHoleLocations(board)) {
-		translate([holePos[0], holePos[1], -0.001])
-                cylinder(piBoardDim(board)[2] + 0.002, d=hd, false);
+		translate([holePos[0], holePos[1], depth-0.001])
+                cylinder(piBoardDim(board)[2] + depth + 0.002, d=hd, false);
+	}
+}
+
+//	Parameters
+//		board: the version of the raspberry pi to generate holes for
+//		height: the height of the standoffs in mm
+module piStandoffs (board, height = 5, preview=true) {
+	hd = 2; // M2 bolt? (pi hole is 2.7mm diameter)
+    wall=3.3/2; //standoff wall thickness
+    
+	//preview of the board itself
+	if(preview==true)
+		% piBoard(board);
+	
+	//mounting holes
+	for(holePos = piHoleLocations(board)) {
+		translate([holePos[0], holePos[1], -height])
+                difference(){
+                    union() {
+                        cylinder(height, d=hd+wall, false);
+                        cylinder(wall*2, d1=hd+wall*2, d2=0, false);
+                    }
+                    cylinder(piBoardDim(board)[2] + height*2, d=hd, false);
+                }
 	}
 }
 
@@ -99,12 +123,14 @@ module piPosts(board, height=5, preview=true) {
 		% translate([0,0,height-piSize[2]]) piBoard(board);
 }
 
-color("DarkGreen", 1, $fn=20) {
-	piBoard("1B");
-    translate([0,70,0]) piBoard("1A+");
-    translate([0,140,0]) piBoard("1B+");
-	translate([100,0,0]) piBoard("2B");
-	translate([100,70,0]) piBoard("Zero");
-    translate([200,0,0]) piBoard("3B");
-    translate([200,70,0]) piBoard("4B");
-}
+//color("DarkGreen", 1, $fn=20) {
+//	piBoard("1B");
+//    translate([0,70,0]) piBoard("1A+");
+//    translate([0,140,0]) piBoard("1B+");
+//	translate([100,0,0]) piBoard("2B");
+//	translate([100,70,0]) piBoard("Zero");
+//    translate([200,0,0]) piBoard("3B");
+//    translate([200,70,0]) piBoard("4B");
+//}
+
+piStandoffs("4B", height=2.5, preview=true, $fn=24);
